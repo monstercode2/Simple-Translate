@@ -56,6 +56,7 @@ For other compatible providers, set their `/v1` base URL and model name.
 - Click the extension icon, then click "Translate page".
 - Use `Alt+T` to toggle page translation.
 - Select text on a page to show the translation popover.
+- Open the options page to choose Ollama or an OpenAI-compatible API. The options page includes setup hints for provider URL, model name, target language, and API key storage.
 
 ## Privacy
 

@@ -12,8 +12,12 @@ const DEFAULT_SETTINGS = {
 
 const form = document.getElementById("form");
 const statusNode = document.getElementById("status");
+const providerSelect = document.getElementById("provider");
+const providerHelp = document.getElementById("providerHelp");
 
 load();
+
+providerSelect.addEventListener("change", updateProviderGuide);
 
 form.addEventListener("submit", async event => {
   event.preventDefault();
@@ -31,4 +35,17 @@ async function load() {
   for (const [key, value] of Object.entries(settings)) {
     if (form.elements[key]) form.elements[key].value = value;
   }
+  updateProviderGuide();
+}
+
+function updateProviderGuide() {
+  const provider = providerSelect.value;
+  providerHelp.textContent = provider === "ollama"
+    ? "Recommended for private local translation. Make sure Ollama is running before use."
+    : "Recommended when you have a hosted API key or a compatible gateway.";
+
+  document.querySelectorAll("[data-provider-panel]").forEach(panel => {
+    const isActive = panel.dataset.providerPanel === provider;
+    panel.setAttribute("aria-disabled", String(!isActive));
+  });
 }
