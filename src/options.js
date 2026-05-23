@@ -24,7 +24,7 @@ form.addEventListener("submit", async event => {
   const data = Object.fromEntries(new FormData(form).entries());
   data.batchSize = Number(data.batchSize || DEFAULT_SETTINGS.batchSize);
   await chrome.storage.sync.set(data);
-  statusNode.textContent = "Saved.";
+  statusNode.textContent = "已保存。";
   setTimeout(() => {
     statusNode.textContent = "";
   }, 1800);
@@ -41,8 +41,8 @@ async function load() {
 function updateProviderGuide() {
   const provider = providerSelect.value;
   providerHelp.textContent = provider === "ollama"
-    ? "Recommended for private local translation. Make sure Ollama is running before use."
-    : "Recommended when you have a hosted API key or a compatible gateway.";
+    ? "适合本地私有翻译。使用前请确认 Ollama 已经启动。"
+    : "适合已有在线 API Key、代理网关或兼容模型服务的场景。";
 
   document.querySelectorAll("[data-provider-panel]").forEach(panel => {
     const isActive = panel.dataset.providerPanel === provider;

@@ -1,32 +1,32 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Simple Translate Options</title>
+  <title>简单翻译设置</title>
   <link rel="stylesheet" href="options.css">
 </head>
 <body>
   <main>
     <header class="page-header">
       <p class="eyebrow">简单翻译</p>
-      <h1>Simple Translate Options</h1>
+      <h1>插件设置</h1>
       <p class="intro">
-        Choose one translation provider, set your target language, then save. Ollama keeps requests on your machine; OpenAI-compatible APIs send text to the endpoint you configure.
+        选择一个翻译服务，设置目标语言，然后保存即可。Ollama 会把请求发到你的本机模型；OpenAI-compatible 会把文本发送到你配置的接口地址。
       </p>
     </header>
 
     <form id="form">
       <section class="section">
-        <h2>1. Choose Provider</h2>
+        <h2>1. 选择翻译服务</h2>
         <p class="hint">
-          Use Ollama if you want local translation. Use OpenAI-compatible if you already have an API endpoint and model name.
+          想完全本地使用就选 Ollama；已经有 API Key、网关或第三方模型服务，就选 OpenAI-compatible API。
         </p>
 
         <label>
-          Provider
+          翻译服务
           <select name="provider" id="provider">
-            <option value="ollama">Ollama local model</option>
+            <option value="ollama">Ollama 本地模型</option>
             <option value="openai">OpenAI-compatible API</option>
           </select>
           <span class="field-help" id="providerHelp"></span>
@@ -34,72 +34,72 @@
       </section>
 
       <section class="section">
-        <h2>2. Language</h2>
+        <h2>2. 语言设置</h2>
         <div class="grid two">
           <label>
-            Target language
+            目标语言
             <input name="targetLang" placeholder="zh-CN">
-            <span class="field-help">Example: <code>zh-CN</code>, <code>en</code>, <code>ja</code>, <code>ko</code>. This is the language you want to read.</span>
+            <span class="field-help">你希望译文显示成什么语言。常用值：<code>zh-CN</code>、<code>en</code>、<code>ja</code>、<code>ko</code>。</span>
           </label>
 
           <label>
-            Source language
+            源语言
             <input name="sourceLang" placeholder="auto">
-            <span class="field-help">Keep <code>auto</code> unless you want to force a source language such as <code>en</code>.</span>
+            <span class="field-help">建议保持 <code>auto</code> 自动识别。只有需要强制指定时再填 <code>en</code>、<code>ja</code> 等语言代码。</span>
           </label>
         </div>
       </section>
 
       <fieldset class="provider-panel" data-provider-panel="ollama">
-        <legend>Ollama</legend>
+        <legend>Ollama 本地模型</legend>
         <p class="hint">
-          Start Ollama locally before translating. A common setup is <code>ollama pull qwen2.5:7b</code>, then <code>ollama serve</code>.
+          使用前请先启动 Ollama。常见命令：<code>ollama pull qwen2.5:7b</code>，然后运行 <code>ollama serve</code>。
         </p>
         <label>
-          Base URL
+          服务地址
           <input name="ollamaBaseUrl" placeholder="http://localhost:11434">
-          <span class="field-help">Default Ollama server address. Keep this unless you changed Ollama's port.</span>
+          <span class="field-help">默认 Ollama 地址是 <code>http://localhost:11434</code>。如果你改过端口，再同步修改这里。</span>
         </label>
         <label>
-          Model
+          模型名称
           <input name="ollamaModel" placeholder="qwen2.5:7b">
-          <span class="field-help">Must match a model installed in Ollama, for example <code>qwen2.5:7b</code> or <code>llama3.1:8b</code>.</span>
+          <span class="field-help">必须填写本机 Ollama 已安装的模型，例如 <code>qwen2.5:7b</code>、<code>llama3.1:8b</code>。</span>
         </label>
       </fieldset>
 
       <fieldset class="provider-panel" data-provider-panel="openai">
-        <legend>OpenAI-compatible</legend>
+        <legend>OpenAI-compatible API</legend>
         <p class="hint">
-          Works with services that support <code>/v1/chat/completions</code>. Your API key is saved only in browser extension storage.
+          适用于兼容 <code>/v1/chat/completions</code> 的服务。API Key 只保存在浏览器扩展存储里，不会写入项目文件或 Git 仓库。
         </p>
         <label>
-          Base URL
+          接口地址
           <input name="openaiBaseUrl" placeholder="https://api.openai.com/v1">
-          <span class="field-help">Use the provider's <code>/v1</code> endpoint, for example <code>https://api.openai.com/v1</code>.</span>
+          <span class="field-help">填写服务商提供的 <code>/v1</code> 地址，例如 <code>https://api.openai.com/v1</code>。</span>
         </label>
         <label>
-          API key
+          API Key
           <input name="openaiApiKey" type="password" autocomplete="off">
-          <span class="field-help">This is not written to project files or Git. It is stored by Chrome extension storage.</span>
+          <span class="field-help">这里保存的是浏览器扩展配置，不会提交到 GitHub。开源仓库里只有空字段。</span>
         </label>
         <label>
-          Model
+          模型名称
           <input name="openaiModel" placeholder="gpt-4.1-mini">
-          <span class="field-help">Use the exact chat model name provided by your API service.</span>
+          <span class="field-help">填写服务商支持的聊天模型名称，例如 <code>gpt-4.1-mini</code> 或你的网关模型名。</span>
         </label>
       </fieldset>
 
       <section class="section">
-        <h2>3. Performance</h2>
+        <h2>3. 性能设置</h2>
         <label>
-          Batch size
+          批量大小
           <input name="batchSize" type="number" min="1" max="12">
-          <span class="field-help">Higher values are faster but may make local models slower or less stable. <code>6</code> is a reasonable default.</span>
+          <span class="field-help">数值越大，请求批量越大。默认 <code>6</code> 比较稳；本地模型慢或容易失败时可以调小。</span>
         </label>
       </section>
 
       <div class="actions">
-        <button>Save</button>
+        <button>保存设置</button>
         <p id="status"></p>
       </div>
     </form>
