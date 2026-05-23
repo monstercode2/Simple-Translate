@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simple Translate Options</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>Simple Translate Options</h1>
+    <form id="form">
+      <label>
+        Provider
+        <select name="provider">
+          <option value="ollama">Ollama local model</option>
+          <option value="openai">OpenAI-compatible API</option>
+        </select>
+      </label>
+
+      <label>
+        Target language
+        <input name="targetLang" placeholder="zh-CN">
+      </label>
+
+      <label>
+        Source language
+        <input name="sourceLang" placeholder="auto">
+      </label>
+
+      <fieldset>
+        <legend>Ollama</legend>
+        <label>
+          Base URL
+          <input name="ollamaBaseUrl" placeholder="http://localhost:11434">
+        </label>
+        <label>
+          Model
+          <input name="ollamaModel" placeholder="qwen2.5:7b">
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>OpenAI-compatible</legend>
+        <label>
+          Base URL
+          <input name="openaiBaseUrl" placeholder="https://api.openai.com/v1">
+        </label>
+        <label>
+          API key
+          <input name="openaiApiKey" type="password" autocomplete="off">
+        </label>
+        <label>
+          Model
+          <input name="openaiModel" placeholder="gpt-4.1-mini">
+        </label>
+      </fieldset>
+
+      <label>
+        Batch size
+        <input name="batchSize" type="number" min="1" max="12">
+      </label>
+
+      <button>Save</button>
+      <p id="status"></p>
+    </form>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>
